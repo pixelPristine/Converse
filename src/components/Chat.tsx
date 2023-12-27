@@ -6,6 +6,7 @@ import {
   onSnapshot,
   query,
   where,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 
@@ -22,7 +23,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    const queryMessages = query(messagesRef);
+    const queryMessages = query(messagesRef, orderBy('createdAt'));
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages: any = [];
       console.log("New Message");
