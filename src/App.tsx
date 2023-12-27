@@ -17,17 +17,17 @@ function App() {
     <>
       {AlertShown && (
         <>
-          <Alert>
+          {/* <Alert>
             Hello <span>World</span>
-          </Alert>
+          </Alert> */}
           <Chat />
         </>
       )}
-      <Button
+      {/* <Button
         items={items}
         length={items.length}
         onClickButton={handleSelectedItem}
-      />
+      /> */}
     </>
   );
 }
