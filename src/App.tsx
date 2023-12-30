@@ -1,33 +1,73 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
+import "./styles/Chat.css";
+import "./styles/Auth.css";
+import "./App.css";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase-config";
 import Chat from "./components/Chat";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Auth from "./components/Auth";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
 
 function App() {
-  const handleSelectedItem = (item: number) => {
-    console.log(item);
-    setAlertShown(!AlertShown);
+  const [IsAuth, setIsAuth] = useState(cookies.get("auth-token"));
+  const [Room, setRoom] = useState("");
+
+  const roomInputRef: any = useRef(null);
+
+  const SignUserOut = async () => {
+    await signOut(auth);
+    cookies.remove("auth-token");
+    setIsAuth(false);
+    setRoom("");
   };
-  const [AlertShown, setAlertShown] = useState(true);
+
+  if (!IsAuth) {
+    return (
+      <>
+        <Auth setIsAuth={setIsAuth} />
+      </>
+    );
+  }
 
   return (
     <>
-      {AlertShown && (
-        <>
-          {/* <Alert>
-            Hello <span>World</span>
-          </Alert> */}
-          <Chat />
-        </>
-      )}
-      {/* <Button
-        items={items}
-        length={items.length}
-        onClickButton={handleSelectedItem}
-      /> */}
+      <div className="App">
+        <div className="sign-out room button">
+          <button onClick={SignUserOut}>Sign Out</button>
+        </div>
+        {Room ? (
+          <Chat
+            room={Room}
+            IsRoomGeneral={Room === "no_room"}
+            LeaveRoom={() => {
+              setRoom("");
+            }}
+          />
+        ) : (
+          <div>
+            <form className="room">
+              <label className="room label">Enter Room Name:</label>
+              <input className="room input" ref={roomInputRef} />
+              <button
+                type="submit"
+                onClick={() => setRoom(roomInputRef.current.value)}
+              >
+                Enter Chat
+              </button>
+            </form>
+          </div>
+        )}
+            {!Room && <p>
+              Functionality for separate chat rooms has been added <br />
+              Use "general" as a central hub
+            </p>}
+      </div>
     </>
   );
 }
@@ -39,3 +79,23 @@ export default App;
 //   heading="Cities"
 //   onSelectItem={handleSelectedItem}
 // />
+
+// const handleSelectedItem = (item: number) => {
+//   console.log(item);
+//   setAlertShown(!AlertShown);
+// };
+// const [AlertShown, setAlertShown] = useState(true);
+{
+  /* {AlertShown && (
+    <>
+      <Alert>
+        Hello <span>World</span>
+      </Alert>
+    </>
+  )}
+  <Button
+    items={items}
+    length={items.length}
+    onClickButton={handleSelectedItem}
+  /> */
+}

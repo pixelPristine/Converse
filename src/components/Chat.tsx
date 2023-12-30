@@ -8,22 +8,23 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
-type MessageType = {
-  id: string;
-  // include other properties of a message here, for example:
-  text: string;
-  createdAt: any; // use a more specific type if available
-};
+interface ChatProps {
+  room: string;
+  IsRoomGeneral: boolean;
+  LeaveRoom: () => void;
+}
 
-const Chat = () => {
+const Chat = ({ room, IsRoomGeneral, LeaveRoom}: ChatProps) => {
   const [newMessage, setNewMessage] = useState("");
   const messagesRef = collection(db, "messages");
   const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    const queryMessages = query(messagesRef, orderBy('createdAt'));
+    const queryMessages = !IsRoomGeneral
+      ? query(messagesRef, where("room", "==", room), orderBy("createdAt"))
+      : query(messagesRef, orderBy("createdAt"));
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages: any = [];
       console.log("New Message");
@@ -45,26 +46,38 @@ const Chat = () => {
     await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
+      user: auth.currentUser?.displayName,
+      room,
     });
 
     setNewMessage("");
   };
 
   return (
-    <div>
-      <div className="">
+    <div className="chat-app">
+      <div className="header">
+      <button onClick={LeaveRoom}>Leave Room</button>
+        <h1>Welcome to : {room.toUpperCase()}</h1>
+      </div>
+      <div className="messages">
         {messages.map((message) => (
-          <h1 key={message.id}> {message.text}</h1>
+          <div className="message" key={message.id}>
+            <span className="user">{message.user}</span>
+            {message.text}
+          </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="new-message-form">
         <input
+          className="new-message-input"
           type="text"
           placeholder="Type your message here..."
           onChange={(e) => setNewMessage(e.target.value)}
           value={newMessage}
         />
-        <button type="submit">Send</button>
+        <button className="send-button" type="submit">
+          Send
+        </button>
       </form>
     </div>
   );
