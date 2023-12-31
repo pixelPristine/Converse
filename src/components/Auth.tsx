@@ -8,11 +8,10 @@ const cookies = new Cookies();
 interface AuthProps {
   setIsAuth: (arg0:boolean) => void;
   setIsGuest: (arg0:boolean) => void;
-  setGuestName: (arg0:string) => void;
 }
 
 
-const Auth = ({ setIsAuth, setIsGuest, setGuestName }: AuthProps) => {
+const Auth = ({ setIsAuth, setIsGuest }: AuthProps) => {
   const SignInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -27,7 +26,7 @@ const Auth = ({ setIsAuth, setIsGuest, setGuestName }: AuthProps) => {
   const GuestNameRef: any = useRef(null)
   const TriggerGuestSignIn = () => {
     if (GuestNameRef.current.value != "") {
-      setGuestName(GuestNameRef.current.value);
+      cookies.set("Guest-Name", GuestNameRef.current.value)
       console.log(GuestNameRef.current.value)
       setIsGuest(true);
     }

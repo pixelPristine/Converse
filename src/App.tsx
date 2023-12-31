@@ -16,8 +16,8 @@ let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
 
 function App() {
   const [IsAuth, setIsAuth] = useState(cookies.get("auth-token"));
-  const [IsGuest, setIsGuest] = useState(false)
-  const [GuestName, setGuestName] = useState("")
+  const [IsGuest, setIsGuest] = useState(cookies.get("Guest-Name"))
+  const [GuestName, setGuestName] = useState(cookies.get("Guest-Name"))
   const [Room, setRoom] = useState("");
 
   const roomInputRef: any = useRef(null);
@@ -25,6 +25,7 @@ function App() {
   const SignUserOut = async () => {
     await signOut(auth);
     cookies.remove("auth-token");
+    cookies.remove("Guest-Name")
     setIsAuth(false);
     setIsGuest(false)
     setGuestName("")
@@ -34,7 +35,7 @@ function App() {
   if (!IsAuth && !IsGuest) {
     return (
       <>
-        <Auth setIsAuth={setIsAuth} setIsGuest={setIsGuest} setGuestName={setGuestName}/>
+        <Auth setIsAuth={setIsAuth} setIsGuest={setIsGuest} />
       </>
     );
   }
@@ -49,7 +50,7 @@ function App() {
           <Chat
             room={Room}
             IsRoomGeneral={Room === "no_room"}
-            guestName={GuestName}
+            guestName={cookies.get("Guest-Name")}
             LeaveRoom={() => {
               setRoom("");
             }}
