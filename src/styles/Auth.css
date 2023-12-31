@@ -1,5 +1,9 @@
 .auth {
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth button {
@@ -12,3 +16,14 @@
     font-size: 18px;
     cursor: pointer;
 }
+
+.auth input {
+    width: 200px;
+    height: 30px;
+    border: 2px solid #3b5998;
+    border-radius: 6px;
+    padding-left: 5px;
+    font-size: 20px;
+    text-align: center;
+    margin: 5px;
+  }

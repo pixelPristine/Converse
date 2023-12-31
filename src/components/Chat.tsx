@@ -14,9 +14,10 @@ interface ChatProps {
   room: string;
   IsRoomGeneral: boolean;
   LeaveRoom: () => void;
+  guestName: string
 }
 
-const Chat = ({ room, IsRoomGeneral, LeaveRoom}: ChatProps) => {
+const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName}: ChatProps) => {
   const [newMessage, setNewMessage] = useState("");
   const messagesRef = collection(db, "messages");
   const [messages, setMessages] = useState<any[]>([]);
@@ -46,7 +47,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom}: ChatProps) => {
     await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
-      user: auth.currentUser?.displayName,
+      user: guestName? guestName : auth.currentUser?.displayName,
       room,
     });
 

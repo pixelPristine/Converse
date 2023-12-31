@@ -1,31 +1,55 @@
 import { auth, provider } from "../firebase-config";
-import { signInWithPopup } from "firebase/auth";
+import { User, UserCredential, signInWithPopup } from "firebase/auth";
+import { useRef, useState } from "react";
 
-import Cookies from 'universal-cookie'
-const cookies =  new Cookies();
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 interface AuthProps {
-  setIsAuth: any;
+  setIsAuth: (arg0:boolean) => void;
+  setIsGuest: (arg0:boolean) => void;
+  setGuestName: (arg0:string) => void;
 }
 
-const Auth = ({setIsAuth}:AuthProps) => {
+
+const Auth = ({ setIsAuth, setIsGuest, setGuestName }: AuthProps) => {
+  const SignInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log(result);
+      cookies.set("auth-token", result.user.refreshToken);
+      setIsAuth(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   
-const SignInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    console.log(result)
-    cookies.set("auth-token", result.user.refreshToken)
-    setIsAuth(true);
-  } catch (err) {  
-    console.error(err)
+  const GuestNameRef: any = useRef(null)
+  const TriggerGuestSignIn = () => {
+    if (GuestNameRef.current.value != "") {
+      setGuestName(GuestNameRef.current.value);
+      console.log(GuestNameRef.current.value)
+      setIsGuest(true);
+    }
   }
-
-}
 
   return (
     <div className="auth">
-      <p>Sign in With Google To Continue</p>
+      <p>Sign in With Google To Continue (Currently Unoperational)</p>
       <button onClick={SignInWithGoogle}>Sign In With Google</button>
+      <p>
+        Or <br />
+        Sign in as a Guest
+      </p>
+      <input
+        className="room input"
+        type="text"
+        placeholder="Enter guest name"
+        autoFocus
+        autoComplete="on"
+        ref={GuestNameRef}
+      />
+      <button type="submit" onClick={TriggerGuestSignIn}>Enter as Guest</button>
     </div>
   );
 };

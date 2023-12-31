@@ -16,6 +16,8 @@ let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
 
 function App() {
   const [IsAuth, setIsAuth] = useState(cookies.get("auth-token"));
+  const [IsGuest, setIsGuest] = useState(false)
+  const [GuestName, setGuestName] = useState("")
   const [Room, setRoom] = useState("");
 
   const roomInputRef: any = useRef(null);
@@ -24,13 +26,15 @@ function App() {
     await signOut(auth);
     cookies.remove("auth-token");
     setIsAuth(false);
+    setIsGuest(false)
+    setGuestName("")
     setRoom("");
   };
 
-  if (!IsAuth) {
+  if (!IsAuth && !IsGuest) {
     return (
       <>
-        <Auth setIsAuth={setIsAuth} />
+        <Auth setIsAuth={setIsAuth} setIsGuest={setIsGuest} setGuestName={setGuestName}/>
       </>
     );
   }
@@ -45,6 +49,7 @@ function App() {
           <Chat
             room={Room}
             IsRoomGeneral={Room === "no_room"}
+            guestName={GuestName}
             LeaveRoom={() => {
               setRoom("");
             }}
