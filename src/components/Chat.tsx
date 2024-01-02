@@ -85,7 +85,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
                 : ""
             }`}
           >
-            <img className="user-img" key={"photo"} src="../images/no-user-photo.jpg" alt="something" />
+            <img className="user-img" key={"photo"} src="images/no-user-photo.jpg" alt="something" />
             <div
               className="message"
               
