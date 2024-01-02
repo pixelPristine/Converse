@@ -24,6 +24,13 @@ body {
     margin-top: 50px;
   }
   
+  .search-thingy{
+    position: absolute;
+    left: 20%;
+    top: 25%;
+    /* transform: translate(-50%, -50%); */
+  }
+
   .room {
     display: flex;
     flex-direction: column;

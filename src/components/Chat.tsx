@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import { auth, db } from "../firebase-config";
+
 const cookies = new Cookies();
 
 interface ChatProps {
@@ -46,7 +47,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
     });
 
     return () => unsubscribe();
-  }, []);
+  },[room, IsRoomGeneral]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,13 +67,17 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
   return (
     <div className="chat-app">
         {/* <button onClick={LeaveRoom}>Leave Room</button> */}
-      <div className="header">
-          <img src="./images/no-user-photo.jpg" alt="something" />
-          <span>{room.toUpperCase()}</span>
-      </div>
+      {room && (
+        <div className="header">
+              <img src="./images/no-user-photo.jpg" alt="something" />
+            <span>{room.toUpperCase()}</span>
+        </div>
+      )}
+
       <div id="msg-window" className="messages">
         {messages.map((message) => (
           <div
+            key={message.id}
             className={`message-container ${
               (cookies.get("Guest-Name") == message.user)
               || (auth.currentUser?.displayName == message.user)
@@ -80,10 +85,10 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
                 : ""
             }`}
           >
-            <img className="user-img" src="./images/no-user-photo.jpg" alt="something" />
+            <img className="user-img" key={"photo"} src="./images/no-user-photo.jpg" alt="something" />
             <div
               className="message"
-              key={message.id}
+              
             >
               <span className="user">{message.user}</span>
               {message.text}
@@ -92,6 +97,8 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
           </div>
         ))}
       </div>
+
+      {room && (
       <form onSubmit={handleSubmit} className="new-message-form">
         <input
           className="new-message-input"
@@ -104,6 +111,8 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
           Send
         </button>
       </form>
+      )}
+      
     </div>
   );
 };
