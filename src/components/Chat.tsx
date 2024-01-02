@@ -69,7 +69,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
         {/* <button onClick={LeaveRoom}>Leave Room</button> */}
       {room && (
         <div className="header">
-              <img src="./images/no-user-photo.jpg" alt="something" />
+              <img src="images/no-user-photo.jpg" alt="something" />
             <span>{room.toUpperCase()}</span>
         </div>
       )}
@@ -85,7 +85,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
                 : ""
             }`}
           >
-            <img className="user-img" key={"photo"} src="./images/no-user-photo.jpg" alt="something" />
+            <img className="user-img" key={"photo"} src="images/no-user-photo.jpg" alt="something" />
             <div
               className="message"
               
