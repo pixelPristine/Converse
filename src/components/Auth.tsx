@@ -6,10 +6,9 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 interface AuthProps {
-  setIsAuth: (arg0:boolean) => void;
-  setIsGuest: (arg0:boolean) => void;
+  setIsAuth: (arg0: boolean) => void;
+  setIsGuest: (arg0: boolean) => void;
 }
-
 
 const Auth = ({ setIsAuth, setIsGuest }: AuthProps) => {
   const SignInWithGoogle = async () => {
@@ -22,15 +21,15 @@ const Auth = ({ setIsAuth, setIsGuest }: AuthProps) => {
       console.error(err);
     }
   };
-  
-  const GuestNameRef: any = useRef(null)
+
+  const GuestNameRef: any = useRef(null);
   const TriggerGuestSignIn = () => {
     if (GuestNameRef.current.value != "") {
-      cookies.set("Guest-Name", GuestNameRef.current.value)
-      console.log(GuestNameRef.current.value)
+      cookies.set("Guest-Name", GuestNameRef.current.value);
+      console.log(GuestNameRef.current.value);
       setIsGuest(true);
     }
-  }
+  };
 
   return (
     <div className="auth">
@@ -38,17 +37,23 @@ const Auth = ({ setIsAuth, setIsGuest }: AuthProps) => {
       <button onClick={SignInWithGoogle}>Sign In With Google</button>
       <p>
         Or <br />
-        Sign in as a Guest
       </p>
-      <input
-        className="room input"
-        type="text"
-        placeholder="Enter guest name"
-        autoFocus
-        autoComplete="on"
-        ref={GuestNameRef}
-      />
-      <button type="submit" onClick={TriggerGuestSignIn}>Enter as Guest</button>
+      <form >
+          <p>
+            Sign in as a Guest
+          </p>
+        <input
+          className="room input"
+          type="text"
+          placeholder="Enter guest name"
+          autoFocus
+          autoComplete="on"
+          ref={GuestNameRef}
+          />
+        <button type="submit" onClick={TriggerGuestSignIn}>
+          Enter as Guest
+        </button>
+      </form>
     </div>
   );
 };

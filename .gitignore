@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/styles/Chats.css
+src/components/Chats.tsx
+src/styles/GigaChats.css
+src/components/Button.tsx
+src/components/Alert.tsx
+src/components/ListGroup.tsx

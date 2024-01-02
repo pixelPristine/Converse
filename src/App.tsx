@@ -1,6 +1,3 @@
-import ListGroup from "./components/ListGroup";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
 import "./styles/Chat.css";
 import "./styles/Auth.css";
 import "./App.css";
@@ -16,8 +13,8 @@ let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
 
 function App() {
   const [IsAuth, setIsAuth] = useState(cookies.get("auth-token"));
-  const [IsGuest, setIsGuest] = useState(cookies.get("Guest-Name"))
-  const [GuestName, setGuestName] = useState(cookies.get("Guest-Name"))
+  const [IsGuest, setIsGuest] = useState(cookies.get("Guest-Name"));
+  const [GuestName, setGuestName] = useState(cookies.get("Guest-Name"));
   const [Room, setRoom] = useState("");
 
   const roomInputRef: any = useRef(null);
@@ -25,10 +22,10 @@ function App() {
   const SignUserOut = async () => {
     await signOut(auth);
     cookies.remove("auth-token");
-    cookies.remove("Guest-Name")
+    cookies.remove("Guest-Name");
     setIsAuth(false);
-    setIsGuest(false)
-    setGuestName("")
+    setIsGuest(false);
+    setGuestName("");
     setRoom("");
   };
 
@@ -69,10 +66,12 @@ function App() {
             </form>
           </div>
         )}
-            {!Room && <p>
-              Functionality for separate chat rooms has been added <br />
-              Use "general" as a central hub
-            </p>}
+        {!Room && (
+          <p>
+            Functionality for separate chat rooms has been added <br />
+            Use "general" as a central hub
+          </p>
+        )}
       </div>
     </>
   );

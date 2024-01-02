@@ -8,19 +8,28 @@ import {
   where,
   orderBy,
 } from "firebase/firestore";
+import Cookies from "universal-cookie";
 import { auth, db } from "../firebase-config";
+const cookies = new Cookies();
 
 interface ChatProps {
   room: string;
   IsRoomGeneral: boolean;
   LeaveRoom: () => void;
-  guestName: string
+  guestName: string;
 }
 
-const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName}: ChatProps) => {
+const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
   const [newMessage, setNewMessage] = useState("");
   const messagesRef = collection(db, "messages");
   const [messages, setMessages] = useState<any[]>([]);
+
+  const scrollToBottom = (id: string) => {
+    const element = document.getElementById(id);
+    if (element != null) {
+      element.scrollTo(0, element.scrollHeight);
+    }
+  };
 
   useEffect(() => {
     const queryMessages = !IsRoomGeneral
@@ -47,7 +56,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName}: ChatProps) => {
     await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
-      user: guestName? guestName : auth.currentUser?.displayName,
+      user: guestName ? guestName : auth.currentUser?.displayName,
       room,
     });
 
@@ -56,15 +65,30 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName}: ChatProps) => {
 
   return (
     <div className="chat-app">
+        {/* <button onClick={LeaveRoom}>Leave Room</button> */}
       <div className="header">
-      <button onClick={LeaveRoom}>Leave Room</button>
-        <h1>Welcome to : {room.toUpperCase()}</h1>
+          <img src="./images/no-user-photo.jpg" alt="something" />
+          <span>{room.toUpperCase()}</span>
       </div>
-      <div className="messages">
+      <div id="msg-window" className="messages">
         {messages.map((message) => (
-          <div className="message" key={message.id}>
-            <span className="user">{message.user}</span>
-            {message.text}
+          <div
+            className={`message-container ${
+              (cookies.get("Guest-Name") == message.user)
+              || (auth.currentUser?.displayName == message.user)
+                ? "message-container-sender"
+                : ""
+            }`}
+          >
+            <img className="user-img" src="./images/no-user-photo.jpg" alt="something" />
+            <div
+              className="message"
+              key={message.id}
+            >
+              <span className="user">{message.user}</span>
+              {message.text}
+              {scrollToBottom("msg-window")}
+            </div>
           </div>
         ))}
       </div>

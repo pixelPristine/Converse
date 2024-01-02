@@ -10,6 +10,7 @@ body {
     height: 100vh;
     flex-direction: column;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(127, 73, 245);
   }
   
   .app-header {
@@ -61,5 +62,7 @@ body {
   .sign-out {
     margin-bottom: 30px;
     margin-top: 10px;
+    position: fixed;
+    left: 10%;
   }
   
