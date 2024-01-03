@@ -26,6 +26,7 @@ const Auth = ({ setIsAuth, setIsGuest, oogabooga }: AuthProps) => {
   const [newSignupPass, setNewSignupPass] = useState("");
   const [newSignupConf, setNewSignupConf] = useState("");
   const [Failure, setFailure] = useState(false)
+  const [duplicate, setDuplicate] = useState(false)
   const SignupRef = collection(db, "UserLogins");
   const [Signups, setSignups] = useState<any[]>([]);
 
@@ -47,7 +48,18 @@ const Auth = ({ setIsAuth, setIsGuest, oogabooga }: AuthProps) => {
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    let dup:boolean = false;
+
+    for (let index = 0; index < Signups.length; index++) {
+      if (Signups[index].name === newSignupName) {
+        setDuplicate(true);
+        dup = true;
+        break;
+      }
+    }
+
     if (
+      dup ||
       newSignupName == "" ||
       newSignupPass == "" ||
       newSignupConf == "" ||
@@ -142,6 +154,7 @@ const Auth = ({ setIsAuth, setIsGuest, oogabooga }: AuthProps) => {
               placeholder="Confirm Password"
             />
             {Failure && <span className="error-message">Failure. Check fields again</span>}
+            {duplicate && <span className="error-message">Name Unavailable. Try something else</span>}
             <button className=" button submit-button" id="upbtn" type="submit">Sign Up</button>
         </form>
     </div>
