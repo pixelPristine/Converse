@@ -28,3 +28,4 @@ src/styles/GigaChats.css
 src/components/Button.tsx
 src/components/Alert.tsx
 src/components/ListGroup.tsx
+src/components/signup.html

@@ -1,0 +1,65 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: absolute;
+    height: 90%;
+    width: 7%;
+    background-color: rgb(37, 6, 88);
+    overflow: hidden;
+
+    left: 2%;
+    top: 5%;
+    bottom: 5%;
+    border-radius: 25px;
+}
+
+.sidebar img{
+    height: auto;
+    width: 50%;
+    margin: 25px;
+}
+
+.sidebar .circular{
+    border-radius: 50px;
+}
+
+.sidebar .panels{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    height: 100%;
+}
+
+.sidebar .panels img{
+    height: auto;
+    width: 50%;
+    padding: 10px 100%;
+    /* margin: 25px; */
+    cursor: pointer;
+}
+
+.sidebar .panels img:hover{
+    background-color: black
+}
+
+.sidebar .panels .contacts-panel{
+    width: 80%;
+}
+
+.sidebar .sign-out {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    
+}
+
+.sidebar .sign-out button{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+  

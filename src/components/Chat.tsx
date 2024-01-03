@@ -79,13 +79,13 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
           <div
             key={message.id}
             className={`message-container ${
-              (cookies.get("Guest-Name") == message.user)
+              (cookies.get("User-Name") == message.user)
               || (auth.currentUser?.displayName == message.user)
                 ? "message-container-sender"
                 : ""
             }`}
           >
-            <img className="user-img" key={"photo"} src="./images/no-user-photo.jpg" alt="something" />
+            <img className="user-img" key={"photo"} src="../images/no-user-photo.jpg" alt="something" />
             <div
               className="message"
               

@@ -2,48 +2,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: sans-serif;
-    width: 51%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-10%,-50%);
+    font-family: 'Montserrat', sans-serif;
+    top: 3%;
+    bottom: 3%;
+    left: 35%;
+    right: 2%;
+    /* transform: translate(-10%,-50%); */
     justify-content: center;
     position: absolute;
+    padding: 1%;
     /* margin: 100px 0px; */
     border-radius: 25px;
     overflow: hidden;
     background-color: white;
+    
+    /* width: 51%; */
+    /* height: 87%; */
 
-    height: 87%;
+    box-shadow: 0px 4px 5px 2px #adafb161;
+
     /* background-color: purple; */
 
     /* border: 2px solid #3b5998; */
   }
   .header {
-    background-color: #E6E6E6;
+    background-color: white;
     color: black;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 8%;
+    height: 12%;
+    border-bottom: 2px solid #E6E6E6;
   }
 
   .header img{
     /* height: 60%; */
     /* width: 7%; */
-    height: 50px;
-    width: 50px;
+    height: 70%;
+    width: auto;
     border-radius: 50px;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 3%;
   }
 
   .header span {
     display: flex;
     padding: 5px;
     font-weight: 700;
+    font-size: x-large;
     /* margin: 0px 10px 0px 10px; */
     padding-left: 15px;
   }
@@ -65,7 +73,7 @@
     margin: 15px 0px 15px 0px;
     padding: 15px;
     color: #3b3737;
-    font-family: "Roboto-Regular", Helvetica;
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: 400;
     letter-spacing: 1.3px;
@@ -129,10 +137,12 @@
     border: none;
     outline: none;
     /* height: 2%; */
-    background-color: #cfcbcb;
+    border: 3px solid #cfcbcb;
     font-size: 16px;
     color: #333;
+    font-size: 24px;
     padding: 10px;
+    padding-left: 40px;
     margin: 0px 15px;
     border-radius: 25px;
   }

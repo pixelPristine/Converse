@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 0;
+    
   }
 
   .App {
@@ -10,7 +11,7 @@ body {
     height: 100vh;
     flex-direction: column;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(127, 73, 245);
+    background: linear-gradient(to top, #53138f, #010101);
   }
   
   .app-header {
@@ -24,34 +25,89 @@ body {
     margin-top: 50px;
   }
   
-  .search-thingy{
+  .search-container{
     position: absolute;
-    left: 20%;
-    top: 25%;
+    top: 2%;
+    bottom: 2%;
+    left: 12%;
+    right: 68%;
+    /* transform: translate(100%,-0%); */
+
+    /* height: 87%; */
+    /* width: 20%; */
+
+    /* border-radius: 25px; */
+    /* border: 2px solid black; */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     /* transform: translate(-50%, -50%); */
   }
 
-  .room {
+  .search-container input {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+    width:90%;
+    height: 8%;
+    padding: 15px;
+    margin: 10px;
+
+    font-size: 18px;
+    
+    background-color: #ffffff;
+    border-radius: 25px;
+    border: 0;
+    box-shadow: 0px 4px 5px 2px #adafb161;
+  }
+
+  .search-results{
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    height: 90%;
+    width: 100%;
+    margin: 10px;
+    overflow: hidden;
+
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0px 4px 5px 2px #adafb161;
   }
+
+  .search-result-entry{
+    
+    
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    text-align: start;
+    padding: 25px;
+    border-bottom: 1px solid rgb(224, 219, 219);
+    cursor: pointer;
+
+  }
+  .search-result-entry:hover{
+      background-color: rgb(128, 128, 125);
+    }
+
+    .search-result-entry img{
+      height: 50px;
+      width: 50px;
+      margin: 10px;
+      border-radius: 50px;
+    }
+
+    .search-result-entry span{
+      margin: 20px;
+      font-weight: 500;
+    font-size: 18px;
+    }
   
-  .room label {
-    text-align: center;
-    font-size: 25px;
-    margin-bottom: 20px;
-  }
-  
-  .room input {
-    width: 200px;
-    height: 30px;
-    border: 2px solid #3b5998;
-    border-radius: 6px;
-    padding-left: 5px;
-    font-size: 20px;
-    text-align: center;
-    margin: 5px;
-  }
   .room button {
     width: 210px;
     height: 40px;
@@ -64,12 +120,5 @@ body {
     background-color: #3b5998;
     color: white;
     cursor: pointer;
-  }
-  
-  .sign-out {
-    margin-bottom: 30px;
-    margin-top: 10px;
-    position: fixed;
-    left: 10%;
   }
   
