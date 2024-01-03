@@ -117,66 +117,74 @@ const Auth = ({ setIsAuth, setIsGuest, oogabooga }: AuthProps) => {
   return (
     <div className="auth" onMouseOver={oogabooga}>
       <div className="container" id="container">
-        <div className="form-container sign-up-container">
-          <form onSubmit={handleSignUp} action="#">
-            <h1>Create Account</h1>
+    <div className="form-container sign-up-container">
+        <form className="form" onSubmit={handleSignUp} action="#">
+            <h1 className="heading">Create Account</h1>
             <input
+              className="input-field"
               onChange={(e) => setNewSignupName(e.target.value)}
               value={newSignupName}
               type="text"
               placeholder="Name"
             />
             <input
+              className="input-field"
               onChange={(e) => setNewSignupPass(e.target.value)}
               value={newSignupPass}
               type="password"
               placeholder="Password"
             />
             <input
+              className="input-field"
               onChange={(e) => setNewSignupConf(e.target.value)}
               value={newSignupConf}
               type="password"
-              placeholder="Confirm Passwprd"
+              placeholder="Confirm Password"
             />
-            {Failure && <span className="error">Failure. Check fields again</span>}
-            <button type="submit" id="upbtn">
-              Sign Up
-            </button>
-          </form>
-        </div>
-        <div className="form-container sign-in-container">
-          <form onSubmit={handleSignIn} action="#">
-            <h1>Sign in</h1>
-            <input onChange={(e) => setNewSignupName(e.target.value)}
-              value={newSignupName} type="text" placeholder="Account Name" />
-            <input onChange={(e) => setNewSignupPass(e.target.value)}
-              value={newSignupPass} type="password" placeholder="Password" />
-            {Failure && <span className="error">Failure. Check fields again</span>}
-            <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
-          </form>
-        </div>
-        <div className="overlay-container">
-          <div className="overlay">
+            {Failure && <span className="error-message">Failure. Check fields again</span>}
+            <button className=" button submit-button" id="upbtn" type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <div className="form-container sign-in-container">
+        <form className="form" onSubmit={handleSignIn} action="#">
+            <h1 className="heading">Sign in</h1>
+            <input 
+              className="input-field"
+              onChange={(e) => setNewSignupName(e.target.value)}
+              value={newSignupName} 
+              type="text" 
+              placeholder="Account Name" />
+            <input 
+              className="input-field"
+              onChange={(e) => setNewSignupPass(e.target.value)}
+              value={newSignupPass} 
+              type="password" 
+              placeholder="Password" />
+            {Failure && <span className="error-message">Failure. Check fields again</span>}
+            <a className="link" href="#">Forgot your password?</a>
+            <button className="button submit-button">Sign In</button>
+        </form>
+    </div>
+
+    <div className="overlay-container">
+        <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>
-                To keep connected with us please login with your personal info
-              </p>
-              <button className="ghost" id="signIn">
-                Sign In
-              </button>
+                <h1 className="heading">Welcome Back!</h1>
+                <p className="paragraph">
+                    To keep connected with us please login with your personal info
+                </p>
+                <button className="button ghost-button" id="signIn">Sign In</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
-              <button className="ghost" id="signUp">
-                Sign Up
-              </button>
+                <h1 className="heading">Hello, Friend!</h1>
+                <p className="paragraph">Enter your personal details and start journey with us</p>
+                <button className="button ghost-button" id="signUp">Sign Up</button>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
 
       {/* <p>Sign in With Google To Continue (Currently Unoperational)</p>
       <button onClick={SignInWithGoogle}>Sign In With Google</button>
