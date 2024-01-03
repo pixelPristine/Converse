@@ -10,6 +10,8 @@ import {
 } from "firebase/firestore";
 import Cookies from "universal-cookie";
 import { auth, db } from "../firebase-config";
+import user_icon from '/images/no-user-photo.jpg'
+
 
 const cookies = new Cookies();
 
@@ -69,7 +71,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
         {/* <button onClick={LeaveRoom}>Leave Room</button> */}
       {room && (
         <div className="header">
-              <img src="../images/no-user-photo.jpg" alt="something" />
+              <img src={user_icon} alt="something" />
             <span>{room.toUpperCase()}</span>
         </div>
       )}
@@ -85,7 +87,7 @@ const Chat = ({ room, IsRoomGeneral, LeaveRoom, guestName }: ChatProps) => {
                 : ""
             }`}
           >
-            <img className="user-img" key={"photo"} src="images/no-user-photo.jpg" alt="something" />
+            <img className="user-img" key={"photo"} src={user_icon} alt="something" />
             <div
               className="message"
               

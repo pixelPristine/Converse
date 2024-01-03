@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import user_icon from '/images/no-user-photo.jpg'
 import {
   addDoc,
   collection,
@@ -65,7 +66,7 @@ const UserSearch = ({ setRoom, user }: UserSearchProps) => {
               setRoom(chat.room);
             }}
           >
-            <img src="images/no-user-photo.jpg" alt="" />
+            <img src={user_icon} alt="" />
             <span>
                 {chat.room}
             </span>
