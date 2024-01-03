@@ -1,3 +1,8 @@
+import user_image from '/images/no-user-photo.jpg'
+import chat_icon from '/images/chat.png'
+
+
+
 interface SidebarProps {
   SignUserOut: () => void;
 }
@@ -5,7 +10,7 @@ interface SidebarProps {
 const Sidebar = ({ SignUserOut }: SidebarProps) => {
   return (
     <div className="sidebar">
-      <img className="circular" src="images/no-user-photo.jpg" alt="" />
+      <img className="circular" src={user_image} alt="" />
 
       <div className="panels">
         <img className="chats-panel" src="images/chat.png" alt="chats" />
